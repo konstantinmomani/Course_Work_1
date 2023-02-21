@@ -1,5 +1,6 @@
 package pro.sky.java.course1.coursework1;
 
+import java.util.Scanner;
 
 public class Main {
     static Employee[] employees = new Employee[10];
@@ -67,12 +68,28 @@ public class Main {
                 3,
                 69300);
 
+
         printAllEmployees();
+        System.out.println();
         System.out.println("Сумма всех зарплат составляет: " + sumIncome());
+        System.out.println();
         minIncomeEmployee();
+        System.out.println();
         maxIncomeEmployee();
+        System.out.println();
         averageIncome();
+        System.out.println();
         printAllFullNames();
+        System.out.println();
+
+//        Добавил ввод из консоли значения процента индексации зарплаты
+
+        System.out.println("Введите процент индексации");
+        Scanner scanner = new Scanner(System.in);
+        double percentIncomeIncrease = scanner.nextDouble();
+
+        increaseTenPercent(percentIncomeIncrease);
+        System.out.println();
     }
 
     public static void printAllEmployees() {
@@ -121,4 +138,21 @@ public class Main {
             System.out.println(employee.getLastName() + " " + employee.getFirstName() + " " + employee.getMiddleName());
         }
     }
+    public static double increaseTenPercent(double percentIncomeIncrease) {
+
+        double incomeIncrease = 0.0;
+        double incomeWithIncrease = 0.0;
+        for (Employee employee : employees) {
+            incomeIncrease = employee.getIncome() / 100.0 * percentIncomeIncrease;
+            incomeWithIncrease = employee.getIncome() + incomeIncrease;
+            System.out.println("Зарплата сотрудника " + employee.getLastName()
+                    + " " + employee.getFirstName()
+                    + " " + employee.getMiddleName()
+                    + " выросла на " + incomeIncrease
+                    + " и составляет " + incomeWithIncrease);
+        }
+        return percentIncomeIncrease;
+    }
+
+
 }
