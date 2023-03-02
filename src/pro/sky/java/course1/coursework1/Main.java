@@ -24,7 +24,7 @@ public class Main {
                 "Дмитрий",
                 "Дмитриевич",
                 3,
-                89342);
+                89340);
         employees[3] = new Employee(
                 "Николаев",
                 "Илья",
@@ -35,7 +35,7 @@ public class Main {
                 "Константинов",
                 "Константин",
                 "Константинович",
-                5,
+                1,
                 300000);
         employees[5] = new Employee(
                 "Сарафанов",
@@ -48,68 +48,81 @@ public class Main {
                 "Александр",
                 "Александрович",
                 4,
-                102342);
+                102320);
         employees[7] = new Employee(
                 "Захаров",
                 "Александр",
                 "Савельевич",
                 5,
-                99900);
+                100000);
         employees[8] = new Employee(
                 "Лоскутов",
                 "Дмитрий",
                 "Витальевич",
                 1,
-                76344);
+                76340);
         employees[9] = new Employee(
                 "Жаров",
                 "Александр",
                 "Иванович",
-                3,
+                1,
                 169300);
 
-
+        printSeparator();
         printAllEmployees();
-        System.out.println("==========================================================================");
+        printSeparator();
         System.out.println("Сумма всех зарплат составляет: " + sumIncome());
-        System.out.println("==========================================================================");
+        printSeparator();
         minIncomeEmployee();
-        System.out.println("==========================================================================");
+        printSeparator();
         maxIncomeEmployee();
-        System.out.println("==========================================================================");
+        printSeparator();
         System.out.println("Средняя величина зарплаты сосотавляет: " + averageIncome());
-        System.out.println("==========================================================================");
+        printSeparator();
         printAllFullNames();
-        System.out.println("==========================================================================");
+        printSeparator();
 
-//        Добавил ввод из консоли значения процента индексации зарплаты
-
+//        Добавил ввод из консоли значения процента индексации зарплаты и номера отдела
         System.out.println("Введите процент индексации");
         Scanner scanner = new Scanner(System.in);
-
         double percentIncomeIncrease = scanner.nextDouble();
-        increaseTenPercent(percentIncomeIncrease);
-        System.out.println("==========================================================================");
+
+        incomeIncrease(percentIncomeIncrease);
+        printSeparator();
         System.out.println("Введите номер отдела");
         int department = scanner.nextInt();
         minIncomeInDepartment(department);
-        System.out.println("==========================================================================");
+        printSeparator();
         maxIncomeInDepartment(department);
-        System.out.println("==========================================================================");
+        printSeparator();
         System.out.println("Сумма зарплат по отделу № " + department
                 + " составляет: " + sumIncomeInDepartment(department));
-        System.out.println("==========================================================================");
+        printSeparator();
         System.out.println("Средняя величина зарплаты сосотавляет: " + averageIncomeInDepartment(department));
-        System.out.println("==========================================================================");
+        printSeparator();
+        incomeIncreaseInDepartment(percentIncomeIncrease, department);
+        printSeparator();
         printEmployeesInDepartment(department);
+        printSeparator();
+        int salaryLevel = 100_000;
+        printChipEmployees(salaryLevel);
+        printSeparator();
+        printCostlyEmployees(salaryLevel);
+        printSeparator();
     }
-//    Получить список всех сотрудников со всеми имеющимися по ним данными (вывести в консоль значения всех полей (toString))
+
+    public static void printSeparator() {
+        System.out.println("=========================================================================================");
+    }
+
+    //    Получить список всех сотрудников со всеми имеющимися по ним данными (вывести в консоль значения всех полей (toString))
     public static void printAllEmployees() {
         for (Employee employee : employees) {
             System.out.println(employee);
         }
     }
-//    Посчитать сумму затрат на зарплаты в месяц.
+
+    //    Посчитать сумму затрат на зарплаты в месяц.
     public static double sumIncome() {
         double sum = 0;
         for (Employee employee : employees) {
@@ -117,6 +130,7 @@ public class Main {
         }
         return sum;
     }
+
     public static void minIncomeEmployee() {
         Employee minIncomeEmployee = null;
         for (Employee employee : employees) {
@@ -129,6 +143,7 @@ public class Main {
                 + " " + minIncomeEmployee.getMiddleName()
                 + ", получает: " + minIncomeEmployee.getIncome());
     }
+
     public static void maxIncomeEmployee() {
         Employee maxIncomeEmployee = null;
         for (Employee employee : employees) {
@@ -141,21 +156,23 @@ public class Main {
                 + " " + maxIncomeEmployee.getMiddleName()
                 + ", получает: " + maxIncomeEmployee.getIncome());
     }
-//    Подсчитать среднее значение зарплат (можно использовать для этого метод из пункта b).
+
+    //    Подсчитать среднее значение зарплат (можно использовать для этого метод из пункта b).
     public static double averageIncome() {
         double sum = sumIncome();
         double averageIncome = sum / employees.length;
         return averageIncome;
     }
-//    Получить Ф. И. О. всех сотрудников (вывести в консоль).
+
+    //    Получить Ф. И. О. всех сотрудников (вывести в консоль).
     public static void printAllFullNames() {
         for (Employee employee : employees) {
             System.out.println(employee.getLastName() + " " + employee.getFirstName() + " " + employee.getMiddleName());
         }
     }
-//    Проиндексировать зарплату (вызвать изменение зарплат у всех сотрудников на величину аргумента в %).
-    public static double increaseTenPercent(double percentIncomeIncrease) {
 
+    //    Проиндексировать зарплату (вызвать изменение зарплат у всех сотрудников на величину аргумента в %).
+    public static double incomeIncrease(double percentIncomeIncrease) {
         double incomeIncrease = 0.0;
         double incomeWithIncrease = 0.0;
         for (Employee employee : employees) {
@@ -169,8 +186,9 @@ public class Main {
         }
         return percentIncomeIncrease;
     }
-//  Получить в качестве параметра номер отдела (1–5) и найти (всего 6 методов):
-//    Сотрудника с минимальной зарплатой.
+
+    //  Получить в качестве параметра номер отдела (1–5) и найти (всего 6 методов):
+//    Сотрудника с минимальной зарплатой по отделу.
     public static void minIncomeInDepartment(int department) {
         Employee minIncomeEmployee = null;
         int numb = department;
@@ -187,7 +205,8 @@ public class Main {
                 + " " + minIncomeEmployee.getMiddleName()
                 + ", получает: " + minIncomeEmployee.getIncome());
     }
-//   Сотрудника с максимальной зарплатой.
+
+    //   Сотрудника с максимальной зарплатой по отделу.
     public static void maxIncomeInDepartment(int department) {
         Employee maxIncomeEmployee = null;
         int numb = department;
@@ -204,7 +223,8 @@ public class Main {
                 + " " + maxIncomeEmployee.getMiddleName()
                 + ", получает: " + maxIncomeEmployee.getIncome());
     }
-//   Сумму затрат на зарплату по отделу.
+
+    //   Сумму затрат на зарплату по отделу.
     public static double sumIncomeInDepartment(int department) {
         double sum = 0;
         int numb = department;
@@ -215,7 +235,8 @@ public class Main {
         }
         return sum;
     }
-//   Среднюю зарплату по отделу (учесть, что количество людей в отделе отличается от employees.length)
+
+    //   Среднюю зарплату по отделу (учесть, что количество людей в отделе отличается от employees.length)
     public static double averageIncomeInDepartment(int department) {
         double sum = 0;
         int numb = department;
@@ -225,9 +246,30 @@ public class Main {
                 sum += employee.getIncome();
                 counter++;
             }
-        }return sum / counter;
+        }
+        return sum / counter;
     }
-//   Напечатать всех сотрудников отдела (все данные, кроме отдела).
+
+    //   Проиндексировать зарплату всех сотрудников отдела на процент, который приходит в качестве параметра.
+    public static double incomeIncreaseInDepartment(double percentIncomeIncrease, int department) {
+        double incomeIncrease = 0.0;
+        double incomeWithIncrease = 0.0;
+        int numb = department;
+        for (Employee employee : employees) {
+            if (employee.getDepartment() == numb) {
+                incomeIncrease = employee.getIncome() / 100.0 * percentIncomeIncrease;
+                incomeWithIncrease = employee.getIncome() + incomeIncrease;
+                System.out.println("Зарплата сотрудника " + employee.getLastName()
+                        + " " + employee.getFirstName()
+                        + " " + employee.getMiddleName()
+                        + " выросла на " + incomeIncrease
+                        + " и составляет " + incomeWithIncrease);
+            }
+        }
+        return percentIncomeIncrease;
+    }
+
+    //   Напечатать всех сотрудников отдела (все данные, кроме отдела).
     public static void printEmployeesInDepartment(int department) {
         int numb = department;
         System.out.println("В отделе № " + numb + " числятся следующие сотрудники:");
@@ -237,6 +279,26 @@ public class Main {
                         + employee.getFirstName() + " "
                         + employee.getMiddleName()
                         + " с зарплатой: " + employee.getIncome());
+            }
+        }
+    }
+
+    //    Получить в качестве параметра число и найти:
+//    Всех сотрудников с зарплатой меньше числа (вывести id, Ф. И. О. и зарплатой в консоль).
+    public static void printChipEmployees(int normalIncome) {
+        int level = normalIncome;
+        for (Employee employee : employees) {
+            if (employee.getIncome() < level) {
+                System.out.println(employee);
+            }
+        }
+    }
+//    Всех сотрудников с зарплатой больше (или равно) числа (вывести id, Ф. И. О. и зарплатой в консоль)
+    public static void printCostlyEmployees(int normalIncome) {
+    int level = normalIncome;
+        for (Employee employee : employees) {
+            if (employee.getIncome() >= level) {
+                System.out.println(employee);
             }
         }
     }
