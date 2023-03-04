@@ -131,6 +131,7 @@ public class Main {
         return sum;
     }
 
+//    Найти сотрудника с минимальной зарплатой.
     public static void minIncomeEmployee() {
         Employee minIncomeEmployee = null;
         for (Employee employee : employees) {
@@ -144,6 +145,7 @@ public class Main {
                 + ", получает: " + minIncomeEmployee.getIncome());
     }
 
+//    Найти сотрудника с максимальной зарплатой.
     public static void maxIncomeEmployee() {
         Employee maxIncomeEmployee = null;
         for (Employee employee : employees) {
